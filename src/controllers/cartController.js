@@ -37,11 +37,7 @@ const createCart = async function (req, res) {
         if (!cartId) {
             const findCart = await cartModel.findOne({ userId: _id })
 
-            // if (findCart) {
-            //     //doubt
-            //     return res.status(400).send({ status: false, message: "cart is already created" })
-            // }
-
+            
             if (!findCart) {
                 const createCart = {
                     userId: _id,
@@ -59,35 +55,7 @@ const createCart = async function (req, res) {
         }
 
 
-        if (cartId) {
-            if (!mongoose.isValidObjectId(cartId)) {
-                return res.status(400).send({ status: false, message: "Invalid cartId" })
-            }
-
-            const findRealCart = await cartModel.findOne({ userId: _id })
-            if (findRealCart) {
-                if (findRealCart._id != cartId) {
-                    return res.status(400).send({ status: false, message: `Incorrect CartId  ` })
-                }
-            }
-
-            const findCart = await cartModel.findOne({ _id: cartId })
-            if (!findCart) {
-                const addToCart = {
-                    userId: _id,
-                    items: {
-                        productId: productId,
-                        quantity: quantity
-                    },
-                    totalPrice: findProduct.price * quantity,
-                    totalItems: 1
-                }
-
-                const cart = await cartModel.create(addToCart)
-
-                return res.status(201).send({ status: true, message: "cart created and product added to cart successfully", data: cart })
-            }
-
+      
             if (findCart) {
 
                 
@@ -111,7 +79,7 @@ const createCart = async function (req, res) {
             }
         }
 
-    }
+    
      catch (error) {
         res.status(500).send({ status: false, message: error.message, });
     }
