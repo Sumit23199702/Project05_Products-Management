@@ -43,7 +43,7 @@ const createCart = async function (req, res) {
             // }
 
             if (!findCart) {
-                const addToCart = {
+                const createCart = {
                     userId: _id,
                     items: {
                         productId: productId,
@@ -53,8 +53,8 @@ const createCart = async function (req, res) {
                     totalItems: 1
                 }
 
-                const cart = await cartModel.create(addToCart)
-                return res.status(201).send({ status: true, message: "Success", data: cart })
+                const cartCreated = await cartModel.create(createCart)
+                return res.status(201).send({ status: true, message: "Success", data: cartCreated })
             }
         }
 
