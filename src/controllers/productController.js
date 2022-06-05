@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 //======================================== < Create Product > ========================================
 const createProduct = async function (req, res) {
     try {
-        //let data = req.body
         let data = req.body
 
         if (Object.keys(data) == 0) {
@@ -216,7 +215,7 @@ const getProductById = async function (req, res) {
 
         let foundProduct = await productModel.findOne({ _id: productId, isDeleted: false })
         if (!foundProduct) {
-            return res.status(400).send({ status: false, msg: 'No product found' })
+            return res.status(404).send({ status: false, msg: 'No product found' })
         }
         return res.status(200).send({ status: true, message: 'Success', data: foundProduct })
 
@@ -240,7 +239,7 @@ const updateProduct = async function (req, res) {
 
 
         if (!validator.isValid(productId)) {
-            return res.status(400).send({ status: false, msg: "userId is required for update data" })
+            return res.status(400).send({ status: false, msg: "ProductId is required for update data" })
         }
 
 

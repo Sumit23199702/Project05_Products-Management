@@ -193,7 +193,7 @@ const loginUser = async function (req, res) {
             },
             "Project-05_group-13",
             {
-                expiresIn: "3600sec",
+                expiresIn: "36000sec",
             });
 
         res.setHeader("Authorization", token)
@@ -223,9 +223,9 @@ const getUser = async function (req, res) {
 
         let findUser = await userModel.findById(userId)
         if (!findUser) {
-            return res.status(200).send({ status: false, message: "User not found" })
+            return res.status(404).send({ status: false, message: "User not found" })
         }
-        return res.status(200).send({ status: true, message: "User profile details", data: findUser })
+        return res.status(200).send({ status: true, message: "User profile details found", data: findUser })
 
     }
     catch (err) {

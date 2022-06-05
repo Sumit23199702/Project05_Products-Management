@@ -94,7 +94,7 @@ const createOrder = async function (req, res) {
 
     }
     catch (error) {
-        console.log(error.message)
+        // console.log(error.message)
         res.status(500).send({ status: false, message: error.message })
 
     }
@@ -117,7 +117,7 @@ const updateOrder = async function (req, res) {
             return res.status(404).send({ status: false, message: "User doesn't exists" });
         }
 
-        // Authentice and Authorized
+        // Authentication and Authorization
         if (req.userId != userId) {
           return res.status(401).send({ status: false, message: "You're not Authorized" });
         }
